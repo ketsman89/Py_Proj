@@ -93,6 +93,6 @@ class Publisher(models.Model):
         blank=True,
     )
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
     
