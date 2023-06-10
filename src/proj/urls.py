@@ -21,4 +21,6 @@ from spravochniki import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('spr/', views.home_page),
+    path('book/<int:pk>/', views.view_book),
+    path('book-delete/<int:pk>/', views.delete_book),
 ]
