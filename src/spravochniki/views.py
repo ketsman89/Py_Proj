@@ -6,8 +6,6 @@ from django.views import generic
 from . import models
 from . import forms
 
-class HomePage(generic.TemplateView):
-    template_name = "spravochniki/home-page.html"
 
 class BookView(generic.DetailView):
     model = models.Book

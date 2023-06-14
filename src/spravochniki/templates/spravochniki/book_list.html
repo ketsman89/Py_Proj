@@ -12,9 +12,9 @@
         <td>{{ obj.pk }}</td>
         <td>{{ obj.name }}</td>
         <td>
-            <a href="{% url 'update-book' pk=obj.pk %}">update</a>
-            <a href="{% url 'view-book' pk=obj.pk %}">view</a>
-            <a href="{% url 'delete-book' pk=obj.pk %}">delete</a>
+            <a href="{% url 'spravochniki:update-book' pk=obj.pk %}">update</a>
+            <a href="{% url 'spravochniki:view-book' pk=obj.pk %}">view</a>
+            <a href="{% url 'spravochniki:delete-book' pk=obj.pk %}">delete</a>
         </td>
     </tr>
     {% endfor %}
