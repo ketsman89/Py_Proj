@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book List</title>
-</head>
-<body>
-    <table border="1">
-        <tr>
-            <th>pk</th>
-            <th>name</th>
-            <th>actions</th>
-        </tr>
-        {% for obj in object_list %}
-        <tr>
-            <td>{{ obj.pk }}</td>
-            <td>{{ obj.name }}</td>
-            <td><a href="/book-update-cbv/{{ obj.pk }}">Update</a></td>
-        </tr>
-        {% endfor %}
-    </table>    
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% block TITLE %}Book List{% endblock TITLE %}
+{% block BODY %}
+<table border="1">
+    <tr>
+        <th>pk</th>
+        <th>name</th>
+        <th>actions</th>
+    </tr>
+    {% for obj in object_list %}
+    <tr>
+        <td>{{ obj.pk }}</td>
+        <td>{{ obj.name }}</td>
+        <td>
+            <a href="{% url 'update-book' pk=obj.pk %}">update</a>
+            <a href="{% url 'view-book' pk=obj.pk %}">view</a>
+            <a href="{% url 'delete-book' pk=obj.pk %}">delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock BODY %}
