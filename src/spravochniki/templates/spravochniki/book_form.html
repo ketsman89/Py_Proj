@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+</head>
+<body>
+    <h1>{{ greeting }}</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <!-- <input type="text" name="book_name" id=""><br>
+        <select name="autor" id="">
+            <option value="">--Please choose an Autor--</option>
+            {% for autor in autors %}
+            <option value="{{ autor.pk }}">{{ autor.name }}</option>
+            {% endfor %}
+        </select><br>
+        <select name="genre" id="">
+            <option value="">--Please choose a Genre--</option>
+            {% for genre in genres %}
+            <option value="{{ genre.pk }}">{{ genre.name }}</option>
+            {% endfor %}
+        </select><br>
+        <select name="serie" id="">
+            <option value="">--Please choose a Serie--</option>
+            {% for serie in series %}
+            <option value="{{ serie.pk }}">{{ serie.name }}</option>
+            {% endfor %}
+        </select><br>
+        <select name="publisher" id="">
+            <option value="">--Please choose a Publisher--</option>
+            {% for publisher in publishers %}
+            <option value="{{ publisher.pk }}">{{ publisher.name }}</option>
+            {% endfor %}
+        </select><br> -->
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

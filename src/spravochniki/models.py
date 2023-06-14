@@ -19,16 +19,35 @@ class Book(models.Model):
         max_length=255,
     )
 
-    def __str__(self):
-        return self.name
+    genre = models.ForeignKey(
+        "spravochniki.Genre",
+        on_delete=models.PROTECT,
+        verbose_name="Genre",
+        default=1
+    )
 
-class Autor(models.Model):
     serie = models.ForeignKey(
         "spravochniki.Serie",
         on_delete=models.PROTECT,
         verbose_name="Serie",
         default=1
     )
+    publisher = models.ForeignKey(
+        "spravochniki.Publisher",
+        on_delete=models.PROTECT,
+        verbose_name="Genre",
+        default=1
+    )
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return f"/book-cbv/{self.pk}"
+    
+
+class Autor(models.Model):
+    
     name = models.CharField(
         verbose_name="Autor name",
         max_length=20,
@@ -43,12 +62,7 @@ class Autor(models.Model):
         return self.name
     
 class Serie(models.Model):
-    genre = models.ForeignKey(
-        "spravochniki.Genre",
-        on_delete=models.PROTECT,
-        verbose_name="Genre",
-        default=1
-    )
+    
     name = models.CharField(
         verbose_name="Series name",
         max_length=20,
@@ -63,12 +77,7 @@ class Serie(models.Model):
         return self.name
     
 class Genre(models.Model):
-    publisher = models.ForeignKey(
-        "spravochniki.Publisher",
-        on_delete=models.PROTECT,
-        verbose_name="Genre",
-        default=1
-    )
+    
     name = models.CharField(
         verbose_name="Genre name",
         max_length=20,

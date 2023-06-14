@@ -22,5 +22,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('spr/', views.home_page),
     path('book/<int:pk>/', views.view_book),
+    path('book-cbv/<int:pk>/', views.BookView.as_view()),
     path('book-delete/<int:pk>/', views.delete_book),
+    path('book-delete-cbv/<int:pk>/', views.BookDeleteView.as_view()),
+    path('book-list-cbv/', views.BookListView.as_view()),
+    path('book-add/', views.add_book),
+    path('book-add-cbv/', views.BookCreateView.as_view()),
+    path('book-update/<int:pk>/', views.update_book),
+    path('book-update-cbv/<int:pk>/', views.BookUpdateView.as_view()),
+    path('added/', views.succes_page),
+    path('send-email/', views.send_email),
+    path('', views.HomePage.as_view()),
+
 ]
