@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block TITLE %}Book List{% endblock TITLE %}
 {% block BODY %}
-<table border="1">
+<table class="table table-bordered">
     <tr>
         <th>pk</th>
         <th>name</th>
@@ -12,9 +12,9 @@
         <td>{{ obj.pk }}</td>
         <td>{{ obj.name }}</td>
         <td>
-            <a href="{% url 'spravochniki:update-book' pk=obj.pk %}">update</a>
-            <a href="{% url 'spravochniki:view-book' pk=obj.pk %}">view</a>
-            <a href="{% url 'spravochniki:delete-book' pk=obj.pk %}">delete</a>
+            <a href="{% url 'spravochniki:update-book' pk=obj.pk %}"><i class="bi bi-pen"></i></a>
+            <a href="{% url 'spravochniki:view-book' pk=obj.pk %}"><i class="bi bi-info-circle"></i></a>
+            <a href="{% url 'spravochniki:delete-book' pk=obj.pk %}"><i class="bi bi-trash3"></i></a>
         </td>
     </tr>
     {% endfor %}
