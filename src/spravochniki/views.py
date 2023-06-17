@@ -1,10 +1,16 @@
+from django.forms.models import BaseModelForm
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from random import randint
 from django.views import generic
 
+
 from . import models
 from . import forms
+
+
+
+
 
 
 class BookView(generic.DetailView):
@@ -14,15 +20,37 @@ class BookCreateView(generic.CreateView):
     model = models.Book
     template_name = "spravochniki/book_form.html"
     fields = [
-            "name", "autor", "genre", "serie", "publisher"
+            "name", 
+            "autor", 
+            "genre", 
+            "serie", 
+            "publisher",
+            "picture"
         ]
+    def get_success_url(self) -> str:
+        self.object.picture_resizer()
+        return super().get_success_url()
     
 class BookUpdateView(generic.UpdateView):
     model = models.Book
     template_name = "spravochniki/book_form.html"
     fields = [
-            "name", "autor", "genre", "serie", "publisher"
+            "name", 
+            "autor", 
+            "genre", 
+            "serie", 
+            "publisher",
+            "picture"
         ]
+    def form_valid(self, form):
+        if form.has_changed():
+            if 'picture' in form.changed_data:
+                print(form.changed_data)
+        return super().form_valid(form)
+
+    def get_success_url(self) -> str:
+        self.object.picture_resizer()
+        return super().get_success_url()
     # success_url = "/added" сделан get_absolute_url в models
 
 class BookDeleteView(generic.DeleteView):

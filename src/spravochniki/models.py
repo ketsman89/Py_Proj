@@ -1,8 +1,15 @@
 from django.db import models
 from django.urls import reverse_lazy
+from PIL import Image
+from pathlib import Path
 # Create your models here.
 
 class Book(models.Model):
+    picture = models.ImageField(
+        verbose_name="Book picture",
+        upload_to="uploads/%Y/%m/%d/"
+    )
+
     autor = models.ForeignKey(
         "spravochniki.Autor",
         on_delete=models.PROTECT,
@@ -45,6 +52,28 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('spravochniki:view-book', kwargs={"pk": self.pk})
         
+    def book_picture_med(self):
+        original_url = self.picture.url
+        new_url = original_url.split(".")
+        picture_url = ".".join(new_url[:-1]) + "_150_." + new_url[-1]
+        return picture_url
+    
+    def book_picture_small(self):
+        original_url = self.picture.url
+        new_url = original_url.split(".")
+        picture_url = ".".join(new_url[:-1]) + "_40_." + new_url[-1]
+        return picture_url
+    
+    def picture_resizer(self):
+        extention = self.picture.file.name.split('.')[-1]
+        BASE_DIR = Path(self.picture.file.name).resolve().parent
+        file_name = Path(self.picture.file.name).resolve().name.split('.')
+        for m_basewidth in [150, 40]:
+            im = Image.open(self.picture.file.name)
+            wpercent = (m_basewidth/float(im.size[0]))
+            hsize = int((float(im.size[1])*float(wpercent)))    
+            im.thumbnail((m_basewidth,hsize), Image.Resampling.LANCZOS)
+            im.save(str(BASE_DIR / ".".join(file_name[:-1])) + f'_{m_basewidth}_.' + extention)
 
 class Autor(models.Model):
     

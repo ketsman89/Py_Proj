@@ -127,6 +127,9 @@ STATIC_URL = 'static/'
 #статик рут для вебсервера
 STATIC_ROOT = '/home/ketsman89/static'
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = local_settings.MEDIA_ROOT
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
