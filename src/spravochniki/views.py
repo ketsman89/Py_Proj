@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from random import randint
 from django.views import generic
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 from . import models
 from . import forms
@@ -25,7 +26,20 @@ class BookCreateView(generic.CreateView):
             "genre", 
             "serie", 
             "publisher",
-            "picture"
+            "picture",
+            "price",
+            "year",
+            "pages",
+            "cover",
+            "format",
+            "isbn",
+            "age",
+            "numbers",
+            "availability",
+            "rating",
+            "weight",
+            "created",
+            "updated",
         ]
     def get_success_url(self) -> str:
         self.object.picture_resizer()
@@ -40,7 +54,20 @@ class BookUpdateView(generic.UpdateView):
             "genre", 
             "serie", 
             "publisher",
-            "picture"
+            "picture",
+            "price",
+            "year",
+            "pages",
+            "cover",
+            "format",
+            "isbn",
+            "age",
+            "numbers",
+            "availability",
+            "rating",
+            "weight",
+            "created",
+            "updated",
         ]
     def form_valid(self, form):
         if form.has_changed():
@@ -58,9 +85,10 @@ class BookDeleteView(generic.DeleteView):
     template_name = "spravochniki/delete-book.html"
     success_url = "/" # здесь необходимо указать редирект, так как объект удаляется
 
-class BookListView(generic.ListView):
+class BookListView(LoginRequiredMixin, generic.ListView):
     model = models.Book
     paginate_by = 20
+    # login_url = reverse_lazy("staff:login")
 
 def home_page(request):
     books = models.Book.objects.filter(pk__lt = 15)

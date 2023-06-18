@@ -4,46 +4,117 @@ from PIL import Image
 from pathlib import Path
 # Create your models here.
 
-class Book(models.Model):
-    picture = models.ImageField(
-        verbose_name="Book picture",
-        upload_to="uploads/%Y/%m/%d/"
+class Book(models.Model): 
+
+    name = models.CharField(
+        verbose_name="Book name",
+        max_length=20,
     )
 
+    picture = models.ImageField(
+        verbose_name="Book picture",
+        upload_to="uploads/%Y/%m/%d/",
+    )
+    price = models.DecimalField(
+        verbose_name="Book price",
+        decimal_places=2,
+        max_digits=6
+    )
     autor = models.ForeignKey(
         "spravochniki.Autor",
         on_delete=models.PROTECT,
         verbose_name="Autor",
     )
-    name = models.CharField(
-        verbose_name="Book name",
-        max_length=20,
-    )
-    description = models.TextField(
-        verbose_name="Book description",
-        null=True,
-        blank=True,
-        max_length=255,
-    )
-
-    genre = models.ForeignKey(
-        "spravochniki.Genre",
-        on_delete=models.PROTECT,
-        verbose_name="Genre",
-        default=1
-    )
-
     serie = models.ForeignKey(
         "spravochniki.Serie",
         on_delete=models.PROTECT,
         verbose_name="Serie",
         default=1
     )
-    publisher = models.ForeignKey(
-        "spravochniki.Publisher",
+    genre = models.ForeignKey(
+        "spravochniki.Genre",
         on_delete=models.PROTECT,
         verbose_name="Genre",
         default=1
+    )
+    year = models.IntegerField(
+        verbose_name="Year",
+        null=True,
+        blank=True,
+        
+        
+    )
+    pages = models.IntegerField(
+        verbose_name="numbers of pages",
+        null=True,
+        blank=True,
+        
+    )
+    cover = models.CharField(
+        verbose_name="book cover",
+        null=True,
+        blank=True,
+        max_length=10,
+    )
+    format = models.CharField(
+        verbose_name="format",
+        null=True,
+        blank=True,
+        max_length=2,
+    )
+
+    isbn = models.CharField(
+        verbose_name="isbn",
+        null=True,
+        blank=True,
+        max_length=15,
+    )
+    weight = models.CharField(
+        verbose_name="weight",
+        null=True,
+        blank=True,
+        max_length=5,
+        
+    )
+    age = models.CharField(
+        verbose_name="age",
+        null=True,
+        blank=True,
+        max_length=3,
+    )
+
+    publisher = models.ForeignKey(
+        "spravochniki.Publisher",
+        on_delete=models.PROTECT,
+        verbose_name="publisher",
+        default=1
+    )
+    numbers = models.IntegerField(
+        verbose_name="numbers of book",
+        null=True,
+        blank=True,
+    )
+    availability = models.CharField(
+        verbose_name="availability",
+        max_length=3,
+        null=True,
+        blank=True,
+    )
+    rating = models.CharField(
+        verbose_name="rating",
+        max_length=3,
+        null=True,
+        blank=True,
+    )
+    created = models.DateField(
+        verbose_name="created",
+        null=True,
+        blank=True,
+    )
+    updated = models.DateField(
+        verbose_name="updated",
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
