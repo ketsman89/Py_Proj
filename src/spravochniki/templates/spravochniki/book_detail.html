@@ -23,12 +23,27 @@
           <p class="card-text">{{ object.rating }}</p>
           <p class="card-text">{{ object.created }}</p>
           <p class="card-text">{{ object.updated }}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a href="#" class="btn btn-primary">Go somewhere</a><br>
+          <div class="row">
+            <div class="col-auto">
+          <input type="number" id="add-to-cart" class="form-control" min="1" max="100" value="1">
+            </div>
+          <div class="col-auto">
+          <button class="btn btn-danger" onclick="addToCart()">Add to cart</button>
+          </div>
+        </div>
+
         </div>
       </div>
     {% comment %} {{ object }} {% endcomment %}
-    <img src="{{ object.picture.url }}" width="{{ object.picture.width }}" class="card-img-top" alt="...">
-    <img src="{{ object.book_picture_med }}" width="150" alt="..."><br>
-    <img src="{{ object.book_picture_small }}" width="40" alt="...">
+    
+    <script>
+      function addToCart() {
+        console.log("click")
+        quantity = document.getElementById("add-to-cart")
+        console.log(quantity.value)
+        window.location.href = "{% url "orders:view-cart" %}" + "?good_id={{ object.pk }}&quantity="+ quantity.value;
+      }
 
+    </script>
     {% endblock BODY %}

@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.HomePage.as_view(), name="home-page"),
     path('spravochniki/', include('spravochniki.urls', namespace='spravochniki')),  
-    path('staff/', include('staff.urls', namespace='staff'))
+    path('staff/', include('staff.urls', namespace='orders')),
+    path('orders/', include('orders.urls', namespace='staff'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # Этого не должно быть в продакшене, поэтому плючуем только в дев сервере,
