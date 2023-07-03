@@ -1,6 +1,6 @@
 from django.forms.models import BaseModelForm
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from random import randint
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -204,6 +204,8 @@ def send_email(request):
             template_name="spravochniki/send-email.html",
             context={"form": form})
     
-    
+def book_det_API(request, pk):
+    book = models.Book.objects.get(pk=pk)    
+    return JsonResponse({"picture": book.picture, "name": book.name})
 
 # Create your views here.
