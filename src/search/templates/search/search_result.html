@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block TITLE %}Search results{% endblock TITLE %}
+{% block BODY %}
+
+<h1>Search results</h1>
+
+<form action="" method="post">
+    {% csrf_token %}    
+    <input type="text" name="q" id="" value="{{ q }}">
+    <button type="submit" class="btn btn-success" value="{{ q }}">Search</button>
+</form>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">TEXT</th>
+        <th scope="col">url</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in results %}
+      <tr>
+        <th scope="row">{{ item.0 }}</th>
+        <td><a href="{{ item.1 }}" class="btn btn-success">See more</a></td>        
+      </tr>
+        {% endfor %}
+      
+    </tbody>
+  </table>
+  
+
+
+{% endblock BODY %}

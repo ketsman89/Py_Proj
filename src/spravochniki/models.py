@@ -122,6 +122,9 @@ class Book(models.Model):
     
     def get_absolute_url(self):
         return reverse_lazy('spravochniki:view-book', kwargs={"pk": self.pk})
+    
+    def get_search_url(self):
+        return reverse_lazy('spravochniki:view-book', kwargs={"pk": self.pk})
         
     def book_picture_med(self):
         original_url = self.picture.url
@@ -157,6 +160,9 @@ class Autor(models.Model):
         null=True,
         blank=True,
     )
+
+    def get_absolute_url(self):
+        return f"/autor/(self.pk)"
 
     def __str__(self):
         return self.name

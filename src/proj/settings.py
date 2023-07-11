@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'staff',
     'orders',
     'rest_framework',
+    'search',
 ]
 
 MIDDLEWARE = [
